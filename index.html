@@ -1,0 +1,3132 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>POSN PREPANNER</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:"Kanit",sans-serif;
+    min-height:100vh;
+    color:#111827;
+
+    background:
+    radial-gradient(circle at 10% 10%,rgba(215,25,32,.18),transparent 30%),
+    radial-gradient(circle at 90% 20%,rgba(239,83,80,.16),transparent 30%),
+    radial-gradient(circle at 50% 100%,rgba(183,28,28,.12),transparent 35%),
+    linear-gradient(135deg,#fff5f5,#ffffff,#fff1f2);
+}
+
+button,
+input{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+.hidden{
+    display:none!important;
+}
+
+/* =========================
+GLASS
+========================= */
+
+.glass{
+
+    background:rgba(255,255,255,.67);
+
+    backdrop-filter:blur(30px) saturate(180%);
+    -webkit-backdrop-filter:blur(30px) saturate(180%);
+
+    border:1px solid rgba(255,255,255,.85);
+
+    box-shadow:
+    0 20px 60px rgba(0,0,0,.07);
+
+    border-radius:28px;
+}
+
+/* =========================
+ORB
+========================= */
+
+.orb{
+    position:fixed;
+
+    width:300px;
+    height:300px;
+
+    border-radius:50%;
+
+    filter:blur(90px);
+
+    opacity:.25;
+
+    pointer-events:none;
+
+    z-index:-1;
+}
+
+.orb1{
+    background:#d71920;
+    top:-100px;
+    left:-100px;
+}
+
+.orb2{
+    background:#ef5350;
+    right:-100px;
+    top:30%;
+}
+
+.orb3{
+    background:#b71c1c;
+    left:20%;
+    bottom:-150px;
+}
+
+
+/* =========================
+LOGIN
+========================= */
+
+#loginPage{
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    padding:20px;
+}
+
+.loginBox{
+
+    width:min(650px,100%);
+
+    padding:40px;
+}
+
+.logo{
+
+    text-align:center;
+
+    margin-bottom:30px;
+}
+
+.logoIcon{
+
+    width:90px;
+    height:90px;
+
+    margin:auto;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:28px;
+
+    background:linear-gradient(145deg,#ffffff,#fff5f5);
+
+    border:2px solid rgba(215,25,32,.12);
+
+    overflow:hidden;
+
+    box-shadow:
+    0 15px 40px rgba(215,25,32,.16);
+}
+
+.logoIcon img{
+    width:68px;
+    height:68px;
+    object-fit:contain;
+    display:block;
+}
+
+.logo h1{
+
+    font-size:38px;
+
+    margin-top:18px;
+}
+
+.logo p{
+
+    color:#6b7280;
+}
+
+.form{
+
+    display:grid;
+
+    gap:14px;
+}
+
+.field{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:6px;
+}
+
+.field label{
+
+    font-size:13px;
+
+    color:#4b5563;
+}
+
+.input{
+
+    width:100%;
+
+    border:none;
+    outline:none;
+
+    padding:14px 17px;
+
+    border-radius:17px;
+
+    background:rgba(255,255,255,.75);
+
+    border:1px solid rgba(255,255,255,.9);
+
+    font-size:15px;
+}
+
+.input:focus{
+
+    box-shadow:
+    0 0 0 4px rgba(215,25,32,.10);
+}
+
+.subjectGrid{
+
+    display:grid;
+
+    grid-template-columns:repeat(5,1fr);
+
+    gap:8px;
+}
+
+.subject{
+
+    border:none;
+
+    padding:13px 5px;
+
+    border-radius:16px;
+
+    background:rgba(255,255,255,.7);
+}
+
+.subject.active{
+
+    background:#d71920;
+
+    color:white;
+}
+
+.subject span{
+
+    display:block;
+
+    font-size:23px;
+
+    margin-bottom:3px;
+}
+
+.mainBtn{
+
+    width:100%;
+
+    border:none;
+
+    padding:16px;
+
+    border-radius:18px;
+
+    background:#d71920;
+
+    color:white;
+
+    font-size:17px;
+
+    margin-top:5px;
+}
+
+.switch{
+
+    text-align:center;
+
+    margin-top:18px;
+
+    font-size:13px;
+
+    color:#6b7280;
+}
+
+.switch button{
+
+    border:none;
+
+    background:none;
+
+    color:#d71920;
+
+    font-size:14px;
+}
+
+
+/* =========================
+APP
+========================= */
+
+#appPage{
+    display:none;
+}
+
+.container{
+
+    width:min(1200px,94%);
+
+    margin:auto;
+
+    padding:20px 0 60px;
+}
+
+.header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:18px;
+}
+
+.brand{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+}
+
+.brandIcon{
+
+    width:50px;
+    height:50px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:16px;
+
+    background:rgba(255,255,255,.75);
+
+    font-size:25px;
+}
+
+.brand h2{
+
+    font-size:20px;
+}
+
+.brand p{
+
+    font-size:12px;
+
+    color:#6b7280;
+}
+
+.logout{
+
+    border:none;
+
+    padding:11px 15px;
+
+    border-radius:14px;
+
+    background:rgba(255,59,48,.1);
+
+    color:#ff3b30;
+}
+
+
+/* =========================
+HERO
+========================= */
+
+.hero{
+
+    padding:35px;
+
+    margin-bottom:18px;
+}
+
+.hero small{
+
+    color:#b71c1c;
+    font-weight:600;
+}
+
+.hero h1{
+
+    font-size:42px;
+
+    letter-spacing:-1px;
+}
+
+.hero p{
+
+    color:#6b7280;
+}
+
+.countdown{
+
+    display:flex;
+
+    gap:10px;
+
+    margin-top:25px;
+
+    flex-wrap:wrap;
+}
+
+.time{
+
+    min-width:90px;
+
+    padding:12px 17px;
+
+    text-align:center;
+
+    border-radius:18px;
+
+    background:rgba(255,255,255,.68);
+}
+
+.time strong{
+
+    display:block;
+
+    font-size:27px;
+}
+
+.time span{
+
+    color:#6b7280;
+
+    font-size:12px;
+}
+
+
+/* =========================
+STATS
+========================= */
+
+.stats{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:14px;
+
+    margin-bottom:22px;
+}
+
+.stat{
+
+    padding:22px;
+}
+
+.statIcon{
+
+    font-size:25px;
+}
+
+.stat h3{
+
+    font-size:28px;
+
+    margin-top:4px;
+}
+
+.stat p{
+
+    color:#6b7280;
+
+    font-size:13px;
+}
+
+
+/* =========================
+SECTION
+========================= */
+
+.section{
+
+    margin-top:22px;
+}
+
+.sectionTitle{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:12px;
+
+    padding:0 5px;
+}
+
+.sectionTitle h2{
+
+    font-size:22px;
+}
+
+.sectionTitle span{
+
+    color:#6b7280;
+
+    font-size:12px;
+}
+
+
+/* =========================
+EMAIL CARD
+========================= */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================
+NOTIFICATION
+========================= */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================
+TODAY
+========================= */
+
+.daily{
+
+    padding:24px;
+}
+
+.planGrid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:13px;
+}
+
+.plan{
+
+    padding:18px;
+
+    border-radius:20px;
+
+    background:rgba(255,255,255,.55);
+
+    border:1px solid rgba(255,255,255,.85);
+}
+
+.planTop{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:10px;
+}
+
+.plan h3{
+
+    margin-top:4px;
+}
+
+.level{
+
+    color:#d71920;
+
+    font-size:12px;
+}
+
+.planTime{
+
+    white-space:nowrap;
+
+    padding:6px 9px;
+
+    border-radius:12px;
+
+    background:rgba(0,0,0,.05);
+
+    font-size:12px;
+}
+
+.plan p{
+
+    color:#6b7280;
+
+    font-size:13px;
+
+    margin-top:8px;
+}
+
+.planBtns{
+
+    display:flex;
+
+    gap:8px;
+
+    margin-top:14px;
+}
+
+.studyBtn{
+
+    flex:1;
+
+    border:none;
+
+    padding:10px;
+
+    border-radius:14px;
+
+    background:#d71920;
+
+    color:white;
+}
+
+.doneBtn{
+
+    border:none;
+
+    padding:10px 15px;
+
+    border-radius:14px;
+
+    background:rgba(183,28,28,.12);
+
+    color:#b71c1c;
+}
+
+.plan.completed{
+
+    opacity:.5;
+}
+
+.plan.completed h3{
+
+    text-decoration:line-through;
+}
+
+
+/* =========================
+CHAPTER
+========================= */
+
+.chapterGrid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:13px;
+}
+
+.chapter{
+
+    padding:19px;
+}
+
+.chapterTop{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+}
+
+.chapterName{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+}
+
+.number{
+
+    width:38px;
+    height:38px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:13px;
+
+    background:rgba(215,25,32,.08);
+
+    color:#d71920;
+}
+
+.score{
+
+    font-size:22px;
+
+    font-weight:600;
+}
+
+.bar{
+
+    height:8px;
+
+    margin-top:13px;
+
+    background:rgba(0,0,0,.06);
+
+    border-radius:20px;
+
+    overflow:hidden;
+}
+
+.fill{
+
+    height:100%;
+
+    border-radius:20px;
+}
+
+.chapterBottom{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-top:13px;
+
+    color:#6b7280;
+
+    font-size:12px;
+}
+
+.readBtn{
+
+    border:none;
+
+    padding:9px 14px;
+
+    border-radius:14px;
+
+    background:rgba(215,25,32,.1);
+
+    color:#d71920;
+}
+
+
+/* =========================
+WEAK
+========================= */
+
+.weakGrid{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:13px;
+}
+
+.weak{
+
+    padding:20px;
+}
+
+.weak small{
+
+    color:#ff3b30;
+}
+
+.weak h3{
+
+    margin-top:5px;
+}
+
+.weak p{
+
+    color:#6b7280;
+
+    font-size:13px;
+}
+
+
+/* =========================
+WEEK
+========================= */
+
+.weekGrid{
+
+    display:grid;
+
+    grid-template-columns:repeat(7,1fr);
+
+    gap:8px;
+}
+
+.day{
+
+    padding:15px;
+
+    min-height:170px;
+}
+
+.day.today{
+
+    border:2px solid rgba(215,25,32,.3);
+}
+
+.dayName{
+
+    color:#d71920;
+
+    font-size:12px;
+}
+
+.dayDate{
+
+    font-size:20px;
+}
+
+.dayTopics{
+
+    margin-top:10px;
+
+    font-size:12px;
+
+    line-height:1.8;
+}
+
+
+/* =========================
+TIPS
+========================= */
+
+.tips{
+
+    padding:24px;
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:13px;
+}
+
+.tip{
+
+    padding:18px;
+
+    border-radius:20px;
+
+    background:rgba(255,255,255,.45);
+}
+
+.tipIcon{
+
+    font-size:27px;
+}
+
+.tip h3{
+
+    margin-top:7px;
+}
+
+.tip p{
+
+    color:#6b7280;
+
+    font-size:13px;
+
+    line-height:1.6;
+}
+
+
+/* =========================
+TIMER
+========================= */
+
+.modal{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:100;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:20px;
+
+    background:rgba(10,20,30,.25);
+
+    backdrop-filter:blur(15px);
+}
+
+.timerBox{
+
+    width:min(520px,100%);
+
+    padding:30px;
+
+    text-align:center;
+
+    position:relative;
+}
+
+.close{
+
+    position:absolute;
+
+    right:15px;
+
+    top:15px;
+
+    width:38px;
+    height:38px;
+
+    border:none;
+
+    border-radius:13px;
+
+    background:rgba(0,0,0,.06);
+
+    font-size:18px;
+}
+
+.timerModes{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:8px;
+
+    margin-top:20px;
+}
+
+.timerMode{
+
+    border:none;
+
+    padding:13px 4px;
+
+    border-radius:17px;
+
+    background:rgba(255,255,255,.7);
+}
+
+.timerMode.active{
+
+    background:#d71920;
+
+    color:white;
+}
+
+.timerMode span{
+
+    display:block;
+
+    font-size:25px;
+}
+
+.custom{
+
+    display:none;
+
+    margin-top:10px;
+}
+
+.custom input{
+
+    width:100%;
+
+    border:none;
+
+    outline:none;
+
+    padding:11px;
+
+    border-radius:14px;
+
+    text-align:center;
+}
+
+.timerDisplay{
+
+    font-size:70px;
+
+    font-weight:600;
+
+    margin-top:20px;
+}
+
+.timerLabel{
+
+    color:#6b7280;
+
+    font-size:13px;
+}
+
+.progress{
+
+    height:8px;
+
+    margin-top:15px;
+
+    background:rgba(0,0,0,.06);
+
+    border-radius:20px;
+
+    overflow:hidden;
+}
+
+.progressFill{
+
+    height:100%;
+
+    width:0%;
+
+    background:#d71920;
+}
+
+.timerBtns{
+
+    display:flex;
+
+    gap:8px;
+
+    margin-top:18px;
+}
+
+.timerStart{
+
+    flex:1;
+
+    border:none;
+
+    padding:14px;
+
+    border-radius:16px;
+
+    background:#d71920;
+
+    color:white;
+}
+
+.timerReset{
+
+    border:none;
+
+    padding:14px 18px;
+
+    border-radius:16px;
+
+    background:rgba(255,59,48,.1);
+
+    color:#ff3b30;
+}
+
+
+/* =========================
+TOAST
+========================= */
+
+.toast{
+
+    position:fixed;
+
+    right:20px;
+
+    bottom:20px;
+
+    z-index:300;
+
+    padding:14px 18px;
+
+    border-radius:17px;
+
+    background:rgba(255,255,255,.88);
+
+    backdrop-filter:blur(20px);
+
+    box-shadow:0 15px 40px rgba(0,0,0,.12);
+
+    opacity:0;
+
+    transform:translateY(20px);
+
+    transition:.3s;
+}
+
+.toast.show{
+
+    opacity:1;
+
+    transform:translateY(0);
+}
+
+
+/* =========================
+MOBILE
+========================= */
+
+@media(max-width:900px){
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .weekGrid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .weakGrid{
+        grid-template-columns:1fr;
+    }
+
+    .tips{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:700px){
+
+    .loginBox{
+        padding:25px 18px;
+    }
+
+    .subjectGrid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .hero{
+        padding:25px;
+    }
+
+    .hero h1{
+        font-size:31px;
+    }
+
+    .planGrid,
+    .chapterGrid{
+        grid-template-columns:1fr;
+    }
+
+    .notification,
+    
+
+    .notification{
+        display:flex;
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .notificationRight{
+        flex-wrap:wrap;
+    }
+
+    .timerDisplay{
+        font-size:58px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="orb orb3"></div>
+
+
+<!-- =====================================================
+เริ่มใช้งาน
+===================================================== -->
+
+<section id="loginPage">
+
+<div class="loginBox glass">
+
+    <div class="logo">
+        <div class="logoIcon"><img src="https://www.posn.or.th/wp-content/uploads/2024/06/cropped-posn-favicon.png" alt="โลโก้ สอวน."></div>
+        <h1>POSN PREPANNER</h1>
+        <p>Smart Study Planner</p>
+    </div>
+
+    <div id="setupForm">
+        <div class="form">
+
+            <div class="field">
+                <label>ชื่อ - นามสกุล</label>
+                <input id="regName" class="input" placeholder="กรอกชื่อของคุณ">
+            </div>
+
+            <div class="field">
+                <label>วันสอบ</label>
+                <input id="regExamDate" type="date" class="input">
+            </div>
+
+            <div class="field">
+                <label>คะแนนเป้าหมาย</label>
+                <input id="regTarget" type="number" min="1" max="100" value="75" class="input">
+            </div>
+
+            <div class="field">
+                <label>เลือกวิชา</label>
+                <div class="subjectGrid">
+                    <button class="subject" data-subject="ฟิสิกส์" onclick="selectSubject(this)"><span>⚛️</span>ฟิสิกส์</button>
+                    <button class="subject" data-subject="เคมี" onclick="selectSubject(this)"><span>🧪</span>เคมี</button>
+                    <button class="subject" data-subject="ชีววิทยา" onclick="selectSubject(this)"><span>🧬</span>ชีวะ</button>
+                    <button class="subject" data-subject="คณิตศาสตร์" onclick="selectSubject(this)"><span>∑</span>คณิต</button>
+                    <button class="subject" data-subject="ดาราศาสตร์" onclick="selectSubject(this)"><span>🌌</span>ดาราศาสตร์</button>
+                </div>
+            </div>
+
+            <button class="mainBtn" onclick="startApp()">🚀 เริ่มใช้งาน</button>
+        </div>
+
+        <div class="switch">
+            ข้อมูลทั้งหมดจะเก็บไว้ในเบราว์เซอร์เครื่องนี้ ไม่ต้องใช้อีเมลหรือรหัสผ่าน
+        </div>
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+APP
+===================================================== -->
+
+<section id="appPage">
+
+<div class="container">
+
+
+<header class="header">
+
+    <div class="brand">
+
+        <div class="brandIcon">
+            🧠
+        </div>
+
+        <div>
+
+            <h2>
+                POSN PREPANNER
+            </h2>
+
+            <p id="userName">
+                นักเรียน
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <button
+        class="logout"
+        onclick="logout()"
+    >
+        ตั้งค่าใหม่
+    </button>
+
+</header>
+
+
+<!-- HERO -->
+
+<section class="hero glass">
+
+    <small id="subjectLabel">
+        สอวน. ฟิสิกส์
+    </small>
+
+    <h1>
+        เตรียมตัวให้พร้อม
+    </h1>
+
+    <p>
+        ระบบวางแผนการอ่านสำหรับการเตรียมสอบ
+    </p>
+
+
+    <div class="countdown">
+
+        <div class="time">
+
+            <strong id="days">0</strong>
+
+            <span>
+                วัน
+            </span>
+
+        </div>
+
+
+        <div class="time">
+
+            <strong id="hours">0</strong>
+
+            <span>
+                ชั่วโมง
+            </span>
+
+        </div>
+
+
+        <div class="time">
+
+            <strong id="minutes">0</strong>
+
+            <span>
+                นาที
+            </span>
+
+        </div>
+
+
+        <div class="time">
+
+            <strong id="seconds">0</strong>
+
+            <span>
+                วินาที
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- STATS -->
+
+<section class="stats">
+
+    <div class="stat glass">
+
+        <div class="statIcon">
+            📊
+        </div>
+
+        <h3 id="overall">
+            0%
+        </h3>
+
+        <p>
+            ความพร้อม
+        </p>
+
+    </div>
+
+
+    <div class="stat glass">
+
+        <div class="statIcon">
+            🎯
+        </div>
+
+        <h3 id="targetDisplay">
+            75%
+        </h3>
+
+        <p>
+            คะแนนเป้าหมาย
+        </p>
+
+    </div>
+
+
+    <div class="stat glass">
+
+        <div class="statIcon">
+            📈
+        </div>
+
+        <h3 id="gap">
+            75%
+        </h3>
+
+        <p>
+            ต้องเพิ่ม
+        </p>
+
+    </div>
+
+
+    <div class="stat glass">
+
+        <div class="statIcon">
+            📚
+        </div>
+
+        <h3 id="chapterCount">
+            0
+        </h3>
+
+        <p>
+            จำนวนบท
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- TODAY -->
+
+<section class="section">
+
+<div class="sectionTitle">
+
+    <h2>
+        📅 วันนี้ควรอ่านอะไร?
+    </h2>
+
+    <span>
+        ระบบเลือกบทที่ควรเน้น
+    </span>
+
+</div>
+
+
+<div class="daily glass">
+
+    <div
+        id="todayPlan"
+        class="planGrid"
+    ></div>
+
+</div>
+
+</section>
+
+
+<!-- CHAPTER -->
+
+<section class="section">
+
+<div class="sectionTitle">
+
+    <h2>
+        📚 ความพร้อมรายบท
+    </h2>
+
+</div>
+
+
+<div
+    id="chapterList"
+    class="chapterGrid"
+></div>
+
+</section>
+
+
+<!-- WEAK -->
+
+<section class="section">
+
+<div class="sectionTitle">
+
+    <h2>
+        🔴 บทที่ควรเร่ง
+    </h2>
+
+</div>
+
+
+<div
+    id="weakList"
+    class="weakGrid"
+></div>
+
+</section>
+
+
+<!-- WEEK -->
+
+<section class="section">
+
+<div class="sectionTitle">
+
+    <h2>
+        🗓️ แผน 7 วัน
+    </h2>
+
+</div>
+
+
+<div
+    id="weekPlan"
+    class="weekGrid"
+></div>
+
+</section>
+
+
+<!-- TIPS -->
+
+<section class="section">
+
+<div class="sectionTitle">
+
+    <h2>
+        💡 Smart Study
+    </h2>
+
+</div>
+
+
+<div class="tips glass">
+
+    <div class="tip">
+
+        <div class="tipIcon">
+            🎯
+        </div>
+
+        <h3>
+            เน้นจุดอ่อน
+        </h3>
+
+        <p>
+            บทที่คะแนนต่ำจะถูกจัดให้อ่านมากขึ้น
+        </p>
+
+    </div>
+
+
+    <div class="tip">
+
+        <div class="tipIcon">
+            🔄
+        </div>
+
+        <h3>
+            อ่านให้หลากหลาย
+        </h3>
+
+        <p>
+            ระบบหมุนบทต่าง ๆ เพื่อไม่ให้อ่านซ้ำแต่บทเดิม
+        </p>
+
+    </div>
+
+
+    <div class="tip">
+
+        <div class="tipIcon">
+            🍅
+        </div>
+
+        <h3>
+            Pomodoro
+        </h3>
+
+        <p>
+            อ่าน 25 นาที พัก 5 นาที
+        </p>
+
+    </div>
+
+</div>
+
+</section>
+
+
+</div>
+
+</section>
+
+
+<!-- TIMER -->
+
+<div
+id="timerModal"
+class="modal hidden"
+>
+
+<div class="timerBox glass">
+
+<button
+class="close"
+onclick="closeTimer()"
+>
+×
+</button>
+
+<small id="timerSubject">
+ฟิสิกส์
+</small>
+
+<h2 id="timerChapter">
+กลศาสตร์
+</h2>
+
+
+<div class="timerModes">
+
+<button
+id="pomodoroBtn"
+class="timerMode active"
+onclick="setTimerMode('pomodoro')"
+>
+
+<span>🍅</span>
+
+Pomodoro
+
+</button>
+
+
+<button
+id="normalBtn"
+class="timerMode"
+onclick="setTimerMode('normal')"
+>
+
+<span>⏱️</span>
+
+ปกติ
+
+</button>
+
+
+<button
+id="customBtn"
+class="timerMode"
+onclick="setTimerMode('custom')"
+>
+
+<span>⚙️</span>
+
+กำหนดเอง
+
+</button>
+
+</div>
+
+
+<div
+id="customBox"
+class="custom"
+>
+
+<input
+id="customMinutes"
+type="number"
+min="1"
+max="300"
+value="45"
+onchange="changeCustomTime()"
+>
+
+</div>
+
+
+<div
+id="timerDisplay"
+class="timerDisplay"
+>
+25:00
+</div>
+
+
+<div
+id="timerLabel"
+class="timerLabel"
+>
+Pomodoro • รอบอ่าน
+</div>
+
+
+<div class="progress">
+
+<div
+id="progressFill"
+class="progressFill"
+></div>
+
+</div>
+
+
+<div class="timerBtns">
+
+<button
+id="timerStart"
+class="timerStart"
+onclick="toggleTimer()"
+>
+▶ เริ่ม
+</button>
+
+
+<button
+class="timerReset"
+onclick="resetTimer()"
+>
+↻ รีเซ็ต
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div
+id="toast"
+class="toast"
+></div>
+
+
+<script>
+
+
+
+/* =====================================================
+   SUBJECTS
+===================================================== */
+
+const subjects={
+
+"ฟิสิกส์":[
+"กลศาสตร์",
+"สมดุลกล",
+"การสั่นและคลื่น",
+"ของไหล",
+"ความร้อน",
+"ไฟฟ้าสถิต",
+"ไฟฟ้ากระแส",
+"แม่เหล็ก",
+"ฟิสิกส์ยุคใหม่"
+],
+
+"เคมี":[
+"โครงสร้างอะตอม",
+"ตารางธาตุ",
+"พันธะเคมี",
+"ปริมาณสาร",
+"แก๊ส",
+"อัตราการเกิดปฏิกิริยา",
+"สมดุลเคมี",
+"กรด-เบส",
+"ไฟฟ้าเคมี",
+"เคมีอินทรีย์"
+],
+
+"ชีววิทยา":[
+"เคมีของสิ่งมีชีวิต",
+"เซลล์",
+"เอนไซม์และเมแทบอลิซึม",
+"พันธุศาสตร์",
+"วิวัฒนาการ",
+"พืช",
+"สัตว์",
+"ร่างกายมนุษย์",
+"นิเวศวิทย"
+],
+
+"คณิตศาสตร์":[
+"จำนวนและพีชคณิต",
+"ทฤษฎีจำนวน",
+"ฟังก์ชัน",
+"เรขาคณิต",
+"ตรีโกณมิติ",
+"การนับ",
+"ความน่าจะเป็น",
+"คอมบินาทอริก",
+"โจทย์แข่งขัน"
+],
+
+"ดาราศาสตร์":[
+"ทรงกลมท้องฟ้า",
+"ระบบสุริยะ",
+"โลกและดวงจันทร์",
+"ดาวฤกษ์",
+"กาแล็กซี",
+"จักรวาล",
+"ฟิสิกส์ดาราศาสตร์",
+"การสังเกตการณ์",
+"โจทย์ดาราศาสตร์"
+]
+
+};
+
+
+/* =====================================================
+   VARIABLES
+===================================================== */
+
+let selectedSubject=null;
+
+let profile=null;
+
+let scores={};
+
+let timerInterval=null;
+
+let timerRunning=false;
+
+let timerMode="pomodoro";
+
+let timerSeconds=1500;
+
+let timerInitialSeconds=1500;
+
+
+/* =====================================================
+   SUBJECT SELECT
+===================================================== */
+
+function selectSubject(button){
+
+document
+.querySelectorAll(".subject")
+.forEach(
+b=>b.classList.remove("active")
+);
+
+button.classList.add("active");
+
+selectedSubject=
+button.dataset.subject;
+
+}
+
+
+/* =====================================================
+   START APP
+===================================================== */
+
+function startApp(){
+
+const name=document.getElementById("regName").value.trim();
+const examDate=document.getElementById("regExamDate").value;
+const target=Number(document.getElementById("regTarget").value)||75;
+
+if(!name){
+showToast("กรุณากรอกชื่อ");
+return;
+}
+
+if(!examDate){
+showToast("กรุณาเลือกวันสอบ");
+return;
+}
+
+if(!selectedSubject){
+showToast("กรุณาเลือกวิชา");
+return;
+}
+
+profile={
+name:name,
+examDate:examDate,
+subject:selectedSubject,
+target:target
+};
+
+scores={};
+subjects[selectedSubject].forEach((_,index)=>{scores[index]=0;});
+
+localStorage.setItem("posn_profile",JSON.stringify(profile));
+localStorage.setItem("posn_scores",JSON.stringify(scores));
+
+showToast("เริ่มต้นระบบสำเร็จ ✓");
+
+setTimeout(()=>{showApp();},400);
+
+}
+
+
+/* =====================================================
+   SHOW APP
+===================================================== */
+
+function showApp(){
+
+document
+.getElementById("loginPage")
+.style.display="none";
+
+document
+.getElementById("appPage")
+.style.display="block";
+
+
+document
+.getElementById("userName")
+.textContent=
+profile.name;
+
+
+
+
+document
+.getElementById("subjectLabel")
+.textContent=
+"สอวน. "+profile.subject;
+
+
+document
+.getElementById("targetDisplay")
+.textContent=
+profile.target+"%";
+
+
+
+renderAll();
+
+startCountdown();
+
+}
+
+
+/* =====================================================
+   LOAD DATA
+===================================================== */
+
+function loadData(){
+
+const saved=
+localStorage.getItem(
+"posn_profile"
+);
+
+
+if(!saved)
+return;
+
+
+profile=
+JSON.parse(saved);
+
+
+const savedScores=
+localStorage.getItem(
+"posn_scores"
+);
+
+
+scores=
+savedScores
+?JSON.parse(savedScores)
+:{};
+
+
+showApp();
+
+}
+
+
+/* =====================================================
+   RENDER ALL
+===================================================== */
+
+function renderAll(){
+
+renderStats();
+
+renderChapters();
+
+renderWeak();
+
+renderToday();
+
+renderWeek();
+
+}
+
+
+/* =====================================================
+   STATS
+===================================================== */
+
+function renderStats(){
+
+const list=
+subjects[profile.subject];
+
+
+let total=0;
+
+
+list.forEach(
+(_,index)=>{
+
+total+=
+Number(scores[index]||0);
+
+}
+);
+
+
+const average=
+Math.round(
+total/list.length
+);
+
+
+const gap=
+Math.max(
+0,
+profile.target-average
+);
+
+
+document
+.getElementById("overall")
+.textContent=
+average+"%";
+
+
+document
+.getElementById("gap")
+.textContent=
+gap+"%";
+
+
+document
+.getElementById("chapterCount")
+.textContent=
+list.length;
+
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+function getStatus(score){
+
+if(score<40)
+return ["🔴","อ่อนมาก"];
+
+if(score<60)
+return ["🟠","ต้องเร่ง"];
+
+if(score<75)
+return ["🟡","ควรทบทวน"];
+
+return ["🟢","พร้อม"];
+
+}
+
+
+function getColor(score){
+
+if(score<40)
+return "#ff3b30";
+
+if(score<60)
+return "#ff9500";
+
+if(score<75)
+return "#ffcc00";
+
+return "#b71c1c";
+
+}
+
+
+/* =====================================================
+   CHAPTER
+===================================================== */
+
+function renderChapters(){
+
+const box=
+document.getElementById(
+"chapterList"
+);
+
+
+box.innerHTML="";
+
+
+subjects[profile.subject]
+.forEach(
+(chapter,index)=>{
+
+const score=
+Number(scores[index]||0);
+
+const status=
+getStatus(score);
+
+
+const div=
+document.createElement("div");
+
+
+div.className=
+"chapter glass";
+
+
+div.innerHTML=`
+
+<div class="chapterTop">
+
+<div class="chapterName">
+
+<div class="number">
+${index+1}
+</div>
+
+<div>
+
+<strong>
+${chapter}
+</strong>
+
+<div style="font-size:12px;color:#6b7280">
+${status[0]} ${status[1]}
+</div>
+
+</div>
+
+</div>
+
+<div class="score">
+${score}%
+</div>
+
+</div>
+
+
+<div class="bar">
+
+<div
+class="fill"
+style="
+width:${score}%;
+background:${getColor(score)}
+"
+></div>
+
+</div>
+
+
+<div class="chapterBottom">
+
+<span>
+ความพร้อม
+</span>
+
+<button
+class="readBtn"
+onclick="openTimer(${index})"
+>
+⏱️ เริ่มอ่าน
+</button>
+
+</div>
+
+`;
+
+
+box.appendChild(div);
+
+}
+);
+
+}
+
+
+/* =====================================================
+   WEAK
+===================================================== */
+
+function renderWeak(){
+
+const box=
+document.getElementById(
+"weakList"
+);
+
+
+box.innerHTML="";
+
+
+subjects[profile.subject]
+.map(
+(chapter,index)=>({
+
+chapter,
+
+index,
+
+score:
+Number(scores[index]||0)
+
+})
+)
+.sort(
+(a,b)=>a.score-b.score
+)
+.slice(0,3)
+.forEach(
+(item)=>{
+
+const div=
+document.createElement("div");
+
+
+div.className=
+"weak glass";
+
+
+div.innerHTML=`
+
+<small>
+🔴 จุดอ่อน
+</small>
+
+<h3>
+${item.chapter}
+</h3>
+
+<p>
+ความพร้อม ${item.score}%
+</p>
+
+<div class="bar">
+
+<div
+class="fill"
+style="
+width:${item.score}%;
+background:${getColor(item.score)}
+"
+></div>
+
+</div>
+
+`;
+
+
+box.appendChild(div);
+
+}
+);
+
+}
+
+
+/* =====================================================
+   TODAY PLAN
+===================================================== */
+
+function renderToday(){
+
+const box=
+document.getElementById(
+"todayPlan"
+);
+
+
+box.innerHTML="";
+
+
+const now=
+new Date();
+
+
+const seed=
+now.getFullYear()*10000+
+(now.getMonth()+1)*100+
+now.getDate();
+
+
+let list=
+subjects[profile.subject]
+.map(
+(chapter,index)=>({
+
+chapter,
+
+index,
+
+score:
+Number(scores[index]||0),
+
+weakness:
+100-Number(scores[index]||0),
+
+rotation:
+(index+seed)%7
+
+})
+);
+
+
+list.sort(
+(a,b)=>
+(
+b.weakness*3+
+b.rotation*.7
+)
+-
+(
+a.weakness*3+
+a.rotation*.7
+)
+);
+
+
+list
+.slice(0,4)
+.forEach(
+(item)=>{
+
+let time;
+let detail;
+let level;
+
+
+if(item.score<40){
+
+time="75 นาที";
+
+detail=
+"อ่านพื้นฐานใหม่ + ทำโจทย์ 10 ข้อ";
+
+level="🔴 เร่งด่วน";
+
+}
+
+else if(item.score<60){
+
+time="60 นาที";
+
+detail=
+"ทบทวนเนื้อหา + ทำโจทย์ 15 ข้อ";
+
+level="🟠 ต้องเร่ง";
+
+}
+
+else if(item.score<75){
+
+time="45 นาที";
+
+detail=
+"ทบทวนจุดที่ผิด + ทำโจทย์";
+
+level="🟡 ทบทวน";
+
+}
+
+else{
+
+time="30 นาที";
+
+detail=
+"ทำโจทย์แข่งขัน + ทบทวนสูตร";
+
+level="🟢 รักษาระดับ";
+
+}
+
+
+const div=
+document.createElement("div");
+
+
+div.className="plan";
+
+
+div.innerHTML=`
+
+<div class="planTop">
+
+<div>
+
+<div class="level">
+${level}
+</div>
+
+<h3>
+${item.chapter}
+</h3>
+
+</div>
+
+<div class="planTime">
+${time}
+</div>
+
+</div>
+
+
+<p>
+${detail}
+</p>
+
+
+<div class="planBtns">
+
+<button
+class="studyBtn"
+onclick="openTimer(${item.index})"
+>
+⏱️ เริ่มอ่าน
+</button>
+
+<button
+class="doneBtn"
+onclick="markDone(this)"
+>
+✓ เสร็จ
+</button>
+
+</div>
+
+`;
+
+
+box.appendChild(div);
+
+}
+);
+
+}
+
+
+/* =====================================================
+   MARK DONE
+===================================================== */
+
+function markDone(button){
+
+const plan=
+button.closest(".plan");
+
+
+plan.classList.toggle(
+"completed"
+);
+
+
+if(
+plan.classList.contains(
+"completed"
+)
+){
+
+button.textContent=
+"✓ เสร็จแล้ว";
+
+
+localStorage.setItem(
+"posn_last_read",
+new Date().toISOString()
+);
+
+
+showToast(
+"บันทึกการอ่านแล้ว ✓"
+);
+
+}
+else{
+
+button.textContent=
+"✓ เสร็จ";
+
+}
+
+}
+
+
+/* =====================================================
+   WEEK
+===================================================== */
+
+function renderWeek(){
+
+const box=
+document.getElementById(
+"weekPlan"
+);
+
+
+box.innerHTML="";
+
+
+const names=[
+"อาทิตย์",
+"จันทร์",
+"อังคาร",
+"พุธ",
+"พฤหัสบดี",
+"ศุกร์",
+"เสาร์"
+];
+
+
+const now=
+new Date();
+
+
+const list=
+subjects[profile.subject]
+.map(
+(chapter,index)=>({
+
+chapter,
+
+index,
+
+score:
+Number(scores[index]||0)
+
+})
+)
+.sort(
+(a,b)=>a.score-b.score
+);
+
+
+for(let d=0;d<7;d++){
+
+const date=
+new Date(now);
+
+
+date.setDate(
+now.getDate()+d
+);
+
+
+let topics="";
+
+
+for(let i=0;i<4;i++){
+
+const item=
+list[
+(d*2+i)%list.length
+];
+
+
+topics+=`
+
+<div>
+${getStatus(item.score)[0]}
+${item.chapter}
+</div>
+
+`;
+
+}
+
+
+const div=
+document.createElement("div");
+
+
+div.className=
+"day glass"+
+(d===0?" today":"");
+
+
+div.innerHTML=`
+
+<div class="dayName">
+${d===0?"วันนี้":names[date.getDay()]}
+</div>
+
+<div class="dayDate">
+${date.getDate()}/${date.getMonth()+1}
+</div>
+
+<div class="dayTopics">
+${topics}
+</div>
+
+`;
+
+
+box.appendChild(div);
+
+}
+
+}
+
+
+/* =====================================================
+   TIMER
+===================================================== */
+
+function openTimer(index){
+
+document
+.getElementById("timerModal")
+.classList.remove("hidden");
+
+
+document
+.getElementById("timerSubject")
+.textContent=
+profile.subject;
+
+
+document
+.getElementById("timerChapter")
+.textContent=
+subjects[
+profile.subject
+][index];
+
+
+setTimerMode("pomodoro");
+
+}
+
+
+function setTimerMode(mode){
+
+stopTimer();
+
+timerMode=mode;
+
+
+document
+.querySelectorAll(".timerMode")
+.forEach(
+b=>b.classList.remove("active")
+);
+
+
+if(mode==="pomodoro"){
+
+document
+.getElementById("pomodoroBtn")
+.classList.add("active");
+
+timerSeconds=1500;
+
+timerInitialSeconds=1500;
+
+document
+.getElementById("timerLabel")
+.textContent=
+"Pomodoro • รอบอ่าน";
+
+document
+.getElementById("customBox")
+.style.display="none";
+
+}
+
+
+if(mode==="normal"){
+
+document
+.getElementById("normalBtn")
+.classList.add("active");
+
+timerSeconds=0;
+
+timerInitialSeconds=0;
+
+document
+.getElementById("timerLabel")
+.textContent=
+"จับเวลาแบบปกติ";
+
+document
+.getElementById("customBox")
+.style.display="none";
+
+}
+
+
+if(mode==="custom"){
+
+document
+.getElementById("customBtn")
+.classList.add("active");
+
+document
+.getElementById("customBox")
+.style.display="block";
+
+changeCustomTime();
+
+}
+
+
+updateTimer();
+
+}
+
+
+function changeCustomTime(){
+
+if(timerMode!=="custom")
+return;
+
+
+const minutes=
+Number(
+document
+.getElementById("customMinutes")
+.value
+)||45;
+
+
+timerSeconds=
+minutes*60;
+
+timerInitialSeconds=
+minutes*60;
+
+
+updateTimer();
+
+}
+
+
+function toggleTimer(){
+
+if(timerRunning){
+
+stopTimer();
+
+return;
+
+}
+
+
+timerRunning=true;
+
+
+document
+.getElementById("timerStart")
+.textContent=
+"⏸ หยุด";
+
+
+timerInterval=
+setInterval(
+timerTick,
+1000
+);
+
+}
+
+
+function timerTick(){
+
+if(timerMode==="normal"){
+
+timerSeconds++;
+
+updateTimer();
+
+return;
+
+}
+
+timerSeconds--;
+
+if(timerSeconds<=0){
+
+timerSeconds=0;
+updateTimer();
+stopTimer();
+
+showToast(
+"⏰ หมดเวลาแล้ว!"
+);
+
+return;
+
+}
+
+updateTimer();
+
+}
+
+
+function stopTimer(){
+
+clearInterval(
+timerInterval
+);
+
+timerInterval=null;
+
+timerRunning=false;
+
+
+const button=
+document.getElementById(
+"timerStart"
+);
+
+
+if(button)
+button.textContent="▶ เริ่ม";
+
+}
+
+
+function resetTimer(){
+
+stopTimer();
+
+
+if(timerMode==="pomodoro"){
+
+timerSeconds=1500;
+
+timerInitialSeconds=1500;
+
+}
+
+else if(timerMode==="normal"){
+
+timerSeconds=0;
+
+timerInitialSeconds=0;
+
+}
+
+else{
+
+changeCustomTime();
+
+return;
+
+}
+
+
+updateTimer();
+
+}
+
+
+function updateTimer(){
+
+const min=
+Math.floor(
+timerSeconds/60
+);
+
+
+const sec=
+timerSeconds%60;
+
+
+document
+.getElementById("timerDisplay")
+.textContent=
+
+String(min).padStart(2,"0")
++
+":"
++
+String(sec).padStart(2,"0");
+
+
+if(timerInitialSeconds>0){
+
+const percent=
+(
+(timerInitialSeconds-timerSeconds)
+/
+timerInitialSeconds
+)*100;
+
+
+document
+.getElementById("progressFill")
+.style.width=
+Math.max(
+0,
+Math.min(100,percent)
+)+"%";
+
+}
+else{
+
+document
+.getElementById("progressFill")
+.style.width="0%";
+
+}
+
+}
+
+
+function closeTimer(){
+
+stopTimer();
+
+document
+.getElementById("timerModal")
+.classList.add("hidden");
+
+}
+
+
+/* =====================================================
+   COUNTDOWN
+===================================================== */
+
+function startCountdown(){
+
+updateCountdown();
+
+setInterval(
+updateCountdown,
+1000
+);
+
+}
+
+
+function updateCountdown(){
+
+if(!profile)
+return;
+
+
+const exam=
+new Date(
+profile.examDate+
+"T23:59:59"
+);
+
+
+const now=
+new Date();
+
+
+const diff=
+exam-now;
+
+
+if(diff<=0)
+return;
+
+
+document
+.getElementById("days")
+.textContent=
+Math.floor(
+diff/(1000*60*60*24)
+);
+
+
+document
+.getElementById("hours")
+.textContent=
+Math.floor(
+(diff/(1000*60*60))%24
+);
+
+
+document
+.getElementById("minutes")
+.textContent=
+Math.floor(
+(diff/(1000*60))%60
+);
+
+
+document
+.getElementById("seconds")
+.textContent=
+Math.floor(
+(diff/1000)%60
+);
+
+}
+
+
+/* =====================================================
+   RESET SETTINGS
+===================================================== */
+
+function logout(){
+
+stopTimer();
+localStorage.removeItem("posn_profile");
+localStorage.removeItem("posn_scores");
+profile=null;
+scores={};
+selectedSubject=null;
+
+document.getElementById("appPage").style.display="none";
+document.getElementById("loginPage").style.display="flex";
+
+document.querySelectorAll(".subject").forEach(b=>b.classList.remove("active"));
+
+document.getElementById("regName").value="";
+document.getElementById("regExamDate").value="";
+document.getElementById("regTarget").value=75;
+
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+let toastTimer;
+
+
+function showToast(message){
+
+const toast=
+document.getElementById("toast");
+
+
+toast.textContent=
+message;
+
+
+toast.classList.add("show");
+
+
+clearTimeout(
+toastTimer
+);
+
+
+toastTimer=
+setTimeout(
+()=>{
+toast.classList.remove("show");
+},
+3000
+);
+
+}
+
+
+/* =====================================================
+   BROWSER NOTIFICATION
+===================================================== */
+
+/* =====================================================
+   START
+===================================================== */
+
+window.addEventListener(
+"load",
+()=>{
+
+loadData();
+
+}
+);
+
+</script>
+
+</body>
+</html>
